@@ -88,7 +88,11 @@ Create file /home/USER/cgi-bin/abe with these contents:
 
     #! /bin/sh
     PYTHONUNBUFFERED=1 exec python -m Abe.abe \
-    --config /home/USER/abe.conf --static-path static/ --watch-pid="$1"
+    --config /home/jdaurio09/bitcore-wallet-service/bitcoin-abe/abe.conf --static-path static/ --watch-pid="$1"
+    
+
+    
+    
 
 Make the file executable:
 
