@@ -41,10 +41,10 @@ Apache must have the directory configured with Options +ExecCGI.
 Create file /etc/apache2/sites-available/abe with these contents:
 
     <VirtualHost *>
-        ServerName YOUR.ABE.DOMAIN
-        Alias /static/ HTDOCS/DIRECTORY
-        Alias /robots.txt HTDOCS/DIRECTORY/robots.txt
-        Alias /favicon.ico HTDOCS/DIRECTORY/favicon.ico
+        ServerName 35.193.17.84
+        Alias /static/ usr/local/lib/python2.7/dist-packages/Abe/htdocs
+        Alias /robots.txt usr/local/lib/python2.7/dist-packages/Abe/htdocs/robots.txt
+        Alias /favicon.ico usr/local/lib/python2.7/dist-packages/Abe/htdocs/favicon.ico
         Alias / /usr/lib/cgi-bin/abe.fcgi/
 
         # Raise this if you get server errors mentioning "mod_fcgid:
@@ -66,7 +66,7 @@ Replace USER with your Unix user name and create file
 
     #! /usr/bin/python
     import subprocess, sys, os
-    command=["sudo", "-u", "USER", "/home/USER/cgi-bin/abe", str(os.getpid())]
+    command=["sudo", "-u", "ROOT", "/home/USER/cgi-bin/abe", str(os.getpid())]
     subprocess.Popen(command, stdin=sys.stdin).wait()
 
 Make the file executable:
@@ -77,7 +77,7 @@ Replace USER with your Unix user name and use visudo(1) to append
 the following to /etc/sudoers:
 
     # This allows the Apache account (www-data) to run Abe as USER.
-    www-data ALL=(USER) NOPASSWD: /home/USER/cgi-bin/abe
+    www-data ALL=(ROOT) NOPASSWD: /home/ROOT/cgi-bin/abe
 
 Put configuration such as database connection parameters in
 /home/USER/abe.conf or change the location below.  See the sample
